@@ -21,10 +21,38 @@ const totalSeconds = 86399;
 // 在这里写你的代码 ↓
 let hours = Math.floor(totalSeconds / (60 ** 2));
 
-let minutes = Math.floor((totalSeconds - 60 ** 2 * hour) / 60)
+let minutes = Math.floor((totalSeconds - 60 ** 2 * hours) / 60)
 
-let seconds = totalSeconds - hour * 60 ** 2 - minutes * 60
+let seconds = totalSeconds - hours * 60 ** 2 - minutes * 60
 
-console.log(`${hour}小时${minutes}分钟${seconds}秒`)
+console.log(`${hours}小时${minutes}分钟${seconds}秒`)
 
+
+// ============================================================
+// 第 2 题：隐式类型转换（先预测，再运行）
+// ============================================================
+// 步骤：
+//   1. 不要运行！先在每行的「预测：」后面写上你认为的输出
+//   2. 运行，把实际结果写在「实际：」后面
+//   3. 猜错的行，用一句话写下原因
+//
+// 提示：思考 + 遇到字符串时会怎样，- * / 遇到字符串时又会怎样
+
+console.log("5" + 3);       // 预测：   53   实际：53
+console.log("5" - 3);       // 预测：   2   实际：2
+console.log("5" * "2");     // 预测：   10   实际：10
+console.log(1 + 2 + "3");   // 预测：   123   实际：33
+console.log("1" + 2 + 3);   // 预测：   123 实际：123
+console.log(true + 1);      // 预测：   2   实际：2
+console.log("abc" * 2);     // 预测：   abcabc  实际：NaN
+console.log(+"42");         // 预测：   42   实际：42
+console.log(null + 1);      // 预测：   1  实际：1
+console.log(undefined + 1); // 预测：   1  实际：NaN
+
+// 总结（用自己的话写）：
+// 没考虑代码按顺序计算
+// 和python的*号混淆
+// 忘记了NaN的存在
+//   + 的规则：
+//   - * / 的规则：
 
