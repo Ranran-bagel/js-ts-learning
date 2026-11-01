@@ -1,0 +1,15 @@
+{
+  "name": "js-ts-learning",
+  "version": "1.0.0",
+  "description": "JavaScript / TypeScript 学习用",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "ts": "tsx",
+    "check": "tsc"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

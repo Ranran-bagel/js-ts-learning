@@ -1,0 +1,23 @@
+{
+  // 学习用：只做类型检查，不生成 .js 文件（运行 TS 用 tsx）
+  "compilerOptions": {
+    "module": "nodenext",
+    "target": "esnext",
+    "types": [],
+    "noEmit": true,
+
+    // 严格模式
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // 模块相关
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules"]
+}
