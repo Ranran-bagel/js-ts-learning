@@ -15,7 +15,11 @@
 const totalSeconds: number = 3725;
 
 // 在这里写你的代码 ↓
-
+const hour: number = Math.floor(totalSeconds / (60 ** 2));
+const minute: number = Math.floor(totalSeconds / 60 % 60);
+const second: number = totalSeconds % 60;
+console.log(`${hour}h ${minute}m ${second}s`);
+console.log();
 
 // ============================================================
 // 第 2 题：TS 会拦住哪些隐式类型转换？
@@ -25,15 +29,16 @@ const totalSeconds: number = 3725;
 //   - 不报错的行：写「✅」
 // 最后总结：TS 允许哪些写法，禁止哪些写法？
 
-// console.log("5" + 3);       //
-// console.log("5" - 3);       //
-// console.log("5" * "2");     //
-// console.log(true + 1);      //
-// console.log("abc" * 2);     //
-// console.log(+"42");         //
-// console.log(null + 1);      //
+console.log("5" + 3);       //✅
+ //console.log("5" - 3);       //❌error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+ //console.log("5" * "2");     //❌error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+ //console.log(true + 1);      //❌error TS2365: Operator '+' cannot be applied to types 'boolean' and 'number'.
+ //console.log("abc" * 2);     //❌error TS2362: The left-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.
+ console.log(+"42");         //✅
+ //console.log(null + 1);      //❌error TS18050: The value 'null' cannot be used here.
 
-// 总结：
+ console.log();
+// 总结：TS 只允许「明显是故意」的转换（字符串拼接、+x、Number(x)），禁止「偷偷」发生的隐式转换。
 //
 
 // ============================================================
@@ -41,16 +46,19 @@ const totalSeconds: number = 3725;
 // ============================================================
 // 取消注释，看看 TS 对 5 == "5" 和 5 === "5" 说了什么，抄下错误信息。
 //
-// const n: number = 5;
-// const s: string = "5";
-// console.log(n == s);
-// console.log(n === s);
-//
+const n: number = 5;
+const s: string = "5";
+//console.log(n == s);//error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+//console.log(n === s);//error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.
+
 // 然后：用 Number() 把 s 转换成数字，写出不报错、输出 true 的比较。
 // 输出：
 //   Equal: true
 
 // 在这里写你的代码 ↓
+console.log(`Equal: ${Number(s) === n}`);
+console.log(`Equal: ${Number(s) == n}`);
+console.log();
 
 
 // ============================================================
@@ -64,9 +72,14 @@ const totalSeconds: number = 3725;
 //        Volume: 0
 //        Volume: 50
 //   3. 实验：用 || 代替 ?? 试试看，结果有什么不同？
-
+// ||的话是左边只有是falsy就return右边，？？是判断左边是否为空值
 // 写成 as，是为了让 TS 把它当成「数字或 null」，而不是固定的 0（as 以后会学）
 let savedVolume = 0 as number | null;
-
 // 在这里写你的代码 ↓
 
+console.log(`Volume: ${savedVolume ?? 50}`);
+console.log(`Volume: ${savedVolume || 50}`);
+console.log();
+savedVolume = null;
+console.log(`Volume: ${savedVolume ?? 50}`);
+console.log(`Volume: ${savedVolume || 50}`);

@@ -21,11 +21,12 @@ const totalSeconds = 86399;
 // 在这里写你的代码 ↓
 let hours = Math.floor(totalSeconds / (60 ** 2));
 
-let minutes = Math.floor((totalSeconds - 60 ** 2 * hours) / 60)
+let minutes = Math.floor((totalSeconds - 60 ** 2 * hours) / 60);
 
-let seconds = totalSeconds - hours * 60 ** 2 - minutes * 60
+let seconds = totalSeconds - hours * 60 ** 2 - minutes * 60;
 
-console.log(`${hours}小时${minutes}分钟${seconds}秒`)
+console.log(`${hours}h ${minutes}m ${seconds}s`);
+console.log();
 
 
 // ============================================================
@@ -48,47 +49,52 @@ console.log("abc" * 2);     // 预测：   abcabc  实际：NaN
 console.log(+"42");         // 预测：   42   实际：42
 console.log(null + 1);      // 预测：   1  实际：1
 console.log(undefined + 1); // 预测：   1  实际：NaN
+console.log();
 
 // 总结（用自己的话写）：
 // 没考虑代码按顺序计算
 // 和python的*号混淆
 // 忘记了NaN的存在
-//   + 的规则：
-//   - * / 的规则：
+//   + 的规则：遇到字符串会拼接
+//   - * / 的规则：- 和 * 和 / 遇到数字的字符串会变成数字演算 如果遇到非数字会输出NaN
 
 // ============================================================
 // 第 3 题：比较运算符 == 和 ===（先预测，再运行）
 // ============================================================
 
-console.log(5 == "5");           // 预测：      实际：
-console.log(5 === "5");          // 预测：      实际：
-console.log(0 == false);         // 预测：      实际：
-console.log(0 === false);        // 预测：      实际：
-console.log("" == 0);            // 预测：      实际：
-console.log(null == undefined);  // 预测：      实际：
-console.log(null === undefined); // 预测：      实际：
-console.log(null == 0);          // 预测：      实际：
-console.log(NaN == NaN);         // 预测：      实际：
-console.log("b" > "a");          // 预测：      实际：
-console.log("10" > "9");         // 预测：      实际：
+console.log(5 == "5");           // 预测：true     实际：true
+console.log(5 === "5");          // 预测：false      实际：false
+console.log(0 == false);         // 预测：true     实际：true
+console.log(0 === false);        // 预测：false      实际：false
+console.log("" == 0);            // 预测：true     实际：true
+console.log(null == undefined);  // 预测：true      实际：true
+console.log(null === undefined); // 预测：false      实际：false
+console.log(null == 0);          // 预测：false      实际：false
+console.log(NaN == NaN);         // 预测：true      实际：false NaN的特殊规则，它不等于任何值包括它自己
+console.log("b" > "a");          // 预测：true     实际：true
+console.log("10" > "9");         // 预测：true     实际：false unicode编码按每个字符来一个一个比
+
+console.log();
 
 // 总结：平时应该用 == 还是 ===？为什么？
-//
+//用=== 因为行为更精准 ==会自动转换 比如“”转换成0再去比较
 
 // ============================================================
 // 第 4 题：逻辑运算符 && || ?? ?.
 // ============================================================
 // (a) 先预测，再运行
-console.log("hello" && "world"); // 预测：      实际：
-console.log(0 && "world");       // 预测：      实际：
-console.log("" || "default");    // 预测：      实际：
-console.log("hi" || "default");  // 预测：      实际：
-console.log(0 || 100);           // 预测：      实际：
-console.log(0 ?? 100);           // 预测：      实际：
-console.log(null ?? 100);        // 预测：      实际：
-console.log(!"");                // 预测：      实际：
-console.log(!!"abc");            // 预测：      实际：
+console.log("hello" && "world"); // 预测：world      实际：world
+console.log(0 && "world");       // 预测：0      实际：0
+console.log("" || "default");    // 预测：default      实际：default
+console.log("hi" || "default");  // 预测：hi      实际：hi
+console.log(0 || 100);           // 预测：100      实际：100
+console.log(0 ?? 100);           // 预测：0      实际：0
+console.log(null ?? 100);        // 预测：100      实际：100
+console.log(!"");                // 预测：true      实际：true
+console.log(!!"abc");            // 预测：false      实际：true 双重取反 abc是truthy
 
+
+console.log();
 // (b) 写代码：用户设置的默认值
 // 已知：
 const settings = { volume: 0, username: "", theme: null };
@@ -108,31 +114,41 @@ const user = { name: "Alice", profile: null };
 //        Email: (none)
 
 // 在这里写你的代码 ↓
+console.log(`Volume (||): ${settings.volume || 50}`);
+console.log(`Volume (??): ${settings.volume ?? 50}`);
+//设置静音是??的写法是正确的
+console.log(`Username: ${settings.username || "Guest"}`);
+console.log(`Theme: ${settings.theme || "light"}`);
+console.log(`Email: ${user?.profile?.email ?? "(none)"}`)
 
+
+console.log();
 
 // ============================================================
 // 第 5 题：赋值和自增运算符（先预测，再运行）
 // ============================================================
 
 let i = 5;
-console.log(i++); // 预测：      实际：
-console.log(i);   // 预测：      实际：
-console.log(++i); // 预测：      实际：
+console.log(i++); // 预测：  5    实际：5
+console.log(i);   // 预测：  6   实际：6
+console.log(++i); // 预测：  7    实际：7
 
 let j = 10;
 j += 5;
 j *= 2;
 j -= 10;
 j /= 4;
-console.log(j);   // 预测：      实际：
+console.log(j);   // 预测： 5     实际：5
 
 let k = 3;
 k **= 2;
-console.log(k);   // 预测：      实际：
+console.log(k);   // 预测：  9    实际：9
 
 let text = "Hi";
 text += "!";
-console.log(text); // 预测：     实际：
+console.log(text); // 预测：  Hi!   实际：Hi!
+
+console.log();
 
 // ============================================================
 // 第 6 题：综合 —— 判断闰年
@@ -148,7 +164,10 @@ console.log(text); // 预测：     实际：
 //        2023 is a leap year: false
 //   提示：可以把 year 改成不同数字跑 4 次，学了函数后可以更方便
 
-const year = 2024;
+const years = [2024, 1900, 2000, 2023];
 
 // 在这里写你的代码 ↓
-
+for (const year of years){
+    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
+    console.log(`${year} is a leap year: ${isLeapYear}`);
+}
